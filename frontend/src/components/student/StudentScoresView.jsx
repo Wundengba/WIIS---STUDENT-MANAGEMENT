@@ -1,7 +1,6 @@
 import { S, Chip } from "../shared";
 import { getGrade, gradeChipStyle } from "../../utils/helpers";
 import { GH_SUBJECTS } from "../../data/schools";
-import { ChartBarIcon } from '@heroicons/react/24/outline';
 
 export default function StudentScoresView({ scores }) {
   const subjects = GH_SUBJECTS.filter(s => scores[s] != null);

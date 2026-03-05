@@ -1,7 +1,7 @@
 import { S, Chip, CAT_BG, CAT_COLOR } from "../shared";
 import AdminCard from "./AdminCard";
 import { ChartBarIcon, CheckCircleIcon, XCircleIcon, ClockIcon, UsersIcon } from '@heroicons/react/24/outline';
-import { getGrade, average, getScoreAggregate } from "../../utils/helpers";
+import { average, getScoreAggregate } from "../../utils/helpers";
 
 export default function AnalyticsTab({ students, scores, selections, schools }) {
   const studentList = Array.isArray(students) ? students : [];

@@ -4,7 +4,6 @@ import { S } from "./components/shared/styles";
 import Home from "./pages/Home";
 import StudentLogin from "./pages/StudentLogin";
 import { AppShell } from "./components/shared/AppShell";
-import { genId } from "./utils/helpers";
 import { useNotifications } from "./hooks/useNotifications";
 
 // Admin tab components
@@ -22,7 +21,6 @@ import NotificationsTab from "./components/admin/NotificationsTab";
 import StudentProfile     from "./components/student/StudentProfile";
 import SchoolDirectoriesTab from "./components/student/SchoolDirectoriesTab";
 import StudentScoresView  from "./components/student/StudentScoresView";
-import SchoolSelectionTab from "./components/student/SchoolSelectionTab";
 import SelectionStatusTab from "./components/student/SelectionStatusTab";
 
 export default function App() {
@@ -35,7 +33,6 @@ export default function App() {
   const [selections,setSelections]= useState({});
   const [loggedStudent, setLoggedStudent] = useState(() => { try { return JSON.parse(localStorage.getItem('loggedStudent')); } catch(e){ return null; }});
   const [sidebarOpen,   setSidebarOpen]   = useState(() => { try { const v = localStorage.getItem('sidebarOpen'); return v?JSON.parse(v):false } catch(e){ return false }});
-  const [loading, setLoading] = useState(true);
   const [schools, setSchools] = useState([]);
   const [regions, setRegions] = useState([]);
   const { notifications, addNotification, markAllRead, unreadCount } = useNotifications();
