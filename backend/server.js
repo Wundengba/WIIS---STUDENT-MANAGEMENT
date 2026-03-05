@@ -31,6 +31,15 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Middleware to ensure CORS header doesn't have trailing slash
+app.use((req, res, next) => {
+  const corsHeader = res.getHeader('Access-Control-Allow-Origin');
+  if (corsHeader && corsHeader.includes('/') && corsHeader.endsWith('/')) {
+    res.setHeader('Access-Control-Allow-Origin', corsHeader.replace(/\/$/, ''));
+  }
+  next();
+});
 app.use(express.json());
 app.use(morgan(NODE_ENV === "production" ? "combined" : "dev"));
 
