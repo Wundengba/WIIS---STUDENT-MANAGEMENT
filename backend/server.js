@@ -20,6 +20,9 @@ app.use(morgan(NODE_ENV === "production" ? "combined" : "dev"));
 app.get("/",   (_, res) => res.json({ message: "Ghana Placement API v1.0", status: "ok" }));
 app.get("/health", (_, res) => res.json({ status: "healthy" }));
 
+// Test route that doesn't use Supabase
+app.get("/api/test", (_, res) => res.json({ message: "API routes are working" }));
+
 console.log("Loading API routes...");
 app.use("/api/students",   studentsRouter);
 app.use("/api/scores",     scoresRouter);
