@@ -33,7 +33,7 @@ export default function App() {
   const [selections,setSelections]= useState({});
   const [loggedStudent, setLoggedStudent] = useState(() => { try { return JSON.parse(localStorage.getItem('loggedStudent')); } catch(e){ return null; }});
   const [sidebarOpen,   setSidebarOpen]   = useState(() => { try { const v = localStorage.getItem('sidebarOpen'); return v?JSON.parse(v):false } catch(e){ return false }});
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
   const [schools, setSchools] = useState([]);
   const [regions, setRegions] = useState([]);
   const { notifications, addNotification, markAllRead, unreadCount } = useNotifications();
