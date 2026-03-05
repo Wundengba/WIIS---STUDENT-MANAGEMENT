@@ -19,18 +19,14 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 console.log(`Environment: NODE_ENV=${NODE_ENV}, PORT=${PORT}, FRONTEND_URL=${FRONTEND_URL}`);
 
-// CORS configuration that accepts both with and without trailing slash
+// CORS configuration - accept both with and without trailing slash
 const corsOptions = {
-  origin: function(origin, callback) {
-    const frontendWithoutSlash = FRONTEND_URL.replace(/\/$/, '');
-    const frontendWithSlash = frontendWithoutSlash + '/';
-    
-    if (!origin || origin === frontendWithoutSlash || origin === frontendWithSlash) {
-      callback(null, origin || frontendWithoutSlash);
-    } else {
-      callback(new Error('CORS policy violation'));
-    }
-  },
+  origin: [
+    'https://wiis-management.netlify.app',
+    'https://wiis-management.netlify.app/',
+    'http://localhost:3000',
+    'http://localhost:3000/'
+  ],
   credentials: true
 };
 
