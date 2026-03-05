@@ -6,7 +6,6 @@ export default function SchoolSelectionTab({ student, schools, selections, onSub
   const existing = student ? selections[student.id] : null;
   // maintain seven numbered slots (null = empty)
   const [slots, setSlots] = useState(() => Array(7).fill(null));
-  const [_activeSlot, setActiveSlot] = useState(null); // which slot is currently being edited
   const [searchQ,  setSearchQ]  = useState("");
   const [regionF,  setRegionF]  = useState("all");
   const [catF,     setCatF]     = useState("all");
@@ -85,7 +84,6 @@ export default function SchoolSelectionTab({ student, schools, selections, onSub
       next[slot] = id;
       return next;
     });
-    setActiveSlot(null);
   };
 
   const clearSlot = (slot) => {
@@ -95,7 +93,6 @@ export default function SchoolSelectionTab({ student, schools, selections, onSub
       next[slot] = null;
       return next;
     });
-    setActiveSlot(null);
   };
 
   const mapServerMessage = (msg) => {
@@ -136,7 +133,6 @@ export default function SchoolSelectionTab({ student, schools, selections, onSub
 
   const resetAll = () => {
     setSlots(Array(7).fill(null));
-    setActiveSlot(null);
     setSearchQ("");
     setRegionF("all");
     setCatF("all");

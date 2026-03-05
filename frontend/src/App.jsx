@@ -33,7 +33,6 @@ export default function App() {
   const [selections,setSelections]= useState({});
   const [loggedStudent, setLoggedStudent] = useState(() => { try { return JSON.parse(localStorage.getItem('loggedStudent')); } catch(e){ return null; }});
   const [sidebarOpen,   setSidebarOpen]   = useState(() => { try { const v = localStorage.getItem('sidebarOpen'); return v?JSON.parse(v):false } catch(e){ return false }});
-  const [_loading, setLoading] = useState(true);
   const [schools, setSchools] = useState([]);
   const [regions, setRegions] = useState([]);
   const { notifications, addNotification, markAllRead, unreadCount } = useNotifications();
@@ -58,7 +57,6 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
         
         // Fetch students
@@ -96,13 +94,10 @@ export default function App() {
         const schoolsData = await schoolsRes.json();
         setSchools(Array.isArray(schoolsData) ? schoolsData : []);
         setRegions([...new Set((Array.isArray(schoolsData) ? schoolsData : []).map(s => s.region))].sort());
-
-        setLoading(false);
       } catch (error) {
         if (process.env.NODE_ENV === "development") {
           console.error("Failed to fetch data from API:", error);
         }
-        setLoading(false);
       }
     };
     
