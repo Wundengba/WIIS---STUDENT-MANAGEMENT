@@ -3,15 +3,21 @@ const cors     = require("cors");
 const morgan   = require("morgan");
 require("dotenv").config();
 
+console.log("Server.js starting...");
+
 const studentsRouter   = require("./routes/students");
 const scoresRouter     = require("./routes/scores");
 const selectionsRouter = require("./routes/selections");
 const schoolsRouter    = require("./routes/schools");
 
+console.log("Routes required successfully");
+
 const app  = express();
 const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || "development";
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+
+console.log(`Environment: NODE_ENV=${NODE_ENV}, PORT=${PORT}, FRONTEND_URL=${FRONTEND_URL}`);
 
 app.use(cors({ origin: FRONTEND_URL }));
 app.use(express.json());
