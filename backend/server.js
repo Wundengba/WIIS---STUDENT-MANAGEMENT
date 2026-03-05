@@ -15,11 +15,23 @@ console.log("Routes required successfully");
 const app  = express();
 const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || "development";
-const FRONTEND_URL = (process.env.FRONTEND_URL || "http://localhost:3000").replace(/\/$/, "");
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 console.log(`Environment: NODE_ENV=${NODE_ENV}, PORT=${PORT}, FRONTEND_URL=${FRONTEND_URL}`);
 
-app.use(cors({ origin: FRONTEND_URL }));
+// CORS configuration that accepts both with and without trailing slash
+const corsOptions = {
+  origin: (origin, callback) => {
+    const allowed = [FRONTEND_URL, FRONTEND_URL.replace(/\/$/, ''), FRONTEND_URL + '/'];
+    if (allowed.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy violation'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan(NODE_ENV === "production" ? "combined" : "dev"));
 
