@@ -24,11 +24,15 @@ app.get("/health", (_, res) => res.json({ status: "healthy" }));
 app.get("/api/test", (_, res) => res.json({ message: "API routes are working" }));
 
 console.log("Loading API routes...");
-app.use("/api/students",   studentsRouter);
-app.use("/api/scores",     scoresRouter);
-app.use("/api/selections", selectionsRouter);
-app.use("/api/schools",    schoolsRouter);
-console.log("API routes loaded successfully");
+try {
+  app.use("/api/students",   studentsRouter);
+  app.use("/api/scores",     scoresRouter);
+  app.use("/api/selections", selectionsRouter);
+  app.use("/api/schools",    schoolsRouter);
+  console.log("API routes loaded successfully");
+} catch (error) {
+  console.error("Error loading API routes:", error.message);
+}
 
 // 404
 app.use((_, res) => res.status(404).json({ error: "Route not found" }));
