@@ -20,10 +20,12 @@ app.use(morgan(NODE_ENV === "production" ? "combined" : "dev"));
 app.get("/",   (_, res) => res.json({ message: "Ghana Placement API v1.0", status: "ok" }));
 app.get("/health", (_, res) => res.json({ status: "healthy" }));
 
+console.log("Loading API routes...");
 app.use("/api/students",   studentsRouter);
 app.use("/api/scores",     scoresRouter);
 app.use("/api/selections", selectionsRouter);
 app.use("/api/schools",    schoolsRouter);
+console.log("API routes loaded successfully");
 
 // 404
 app.use((_, res) => res.status(404).json({ error: "Route not found" }));
