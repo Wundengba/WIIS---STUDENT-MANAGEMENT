@@ -1,7 +1,7 @@
 {
   "name": "ghana-placement-backend",
-  "version": "1.0.0",
-  "description": "Ghana Schools Placement System — Express REST API",
+  "version": "1.0.1",
+  "description": "Ghana Schools Placement System — Express REST API (updated)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
