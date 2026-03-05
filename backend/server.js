@@ -19,25 +19,31 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 console.log(`Environment: NODE_ENV=${NODE_ENV}, PORT=${PORT}, FRONTEND_URL=${FRONTEND_URL}`);
 
-// CORS configuration - accept both with and without trailing slash
-const corsOptions = {
-  origin: [
+// Manual CORS handling
+app.use((req, res, next) => {
+  const origin = req.get('Origin');
+  const allowedOrigins = [
     'https://wiis-management.netlify.app',
     'https://wiis-management.netlify.app/',
     'http://localhost:3000',
     'http://localhost:3000/'
-  ],
-  credentials: true
-};
-
-app.use(cors(corsOptions));
-
-// Middleware to ensure CORS header doesn't have trailing slash
-app.use((req, res, next) => {
-  const corsHeader = res.getHeader('Access-Control-Allow-Origin');
-  if (corsHeader && corsHeader.includes('/') && corsHeader.endsWith('/')) {
-    res.setHeader('Access-Control-Allow-Origin', corsHeader.replace(/\/$/, ''));
+  ];
+  
+  // Normalize origin for checking
+  let normalizedOrigin = origin;
+  if (origin && allowedOrigins.includes(origin)) {
+    // Echo back the origin, but strip trailing slash
+    normalizedOrigin = origin.replace(/\/$/, '');
+    res.set('Access-Control-Allow-Origin', normalizedOrigin);
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
+  
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  
   next();
 });
 app.use(express.json());
