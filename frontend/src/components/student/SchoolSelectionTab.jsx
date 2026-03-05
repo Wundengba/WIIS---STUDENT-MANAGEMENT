@@ -6,6 +6,7 @@ export default function SchoolSelectionTab({ student, schools, selections, onSub
   const existing = student ? selections[student.id] : null;
   // maintain seven numbered slots (null = empty)
   const [slots, setSlots] = useState(() => Array(7).fill(null));
+  const [activeSlot, setActiveSlot] = useState(null); // which slot is currently being edited
   const [searchQ,  setSearchQ]  = useState("");
   const [regionF,  setRegionF]  = useState("all");
   const [catF,     setCatF]     = useState("all");
