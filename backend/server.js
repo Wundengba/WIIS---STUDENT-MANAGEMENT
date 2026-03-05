@@ -21,14 +21,17 @@ console.log(`Environment: NODE_ENV=${NODE_ENV}, PORT=${PORT}, FRONTEND_URL=${FRO
 
 // CORS configuration that accepts both with and without trailing slash
 const corsOptions = {
-  origin: (origin, callback) => {
-    const allowed = [FRONTEND_URL, FRONTEND_URL.replace(/\/$/, ''), FRONTEND_URL + '/'];
-    if (allowed.includes(origin) || !origin) {
-      callback(null, true);
+  origin: function(origin, callback) {
+    const frontendWithoutSlash = FRONTEND_URL.replace(/\/$/, '');
+    const frontendWithSlash = frontendWithoutSlash + '/';
+    
+    if (!origin || origin === frontendWithoutSlash || origin === frontendWithSlash) {
+      callback(null, origin || frontendWithoutSlash);
     } else {
       callback(new Error('CORS policy violation'));
     }
-  }
+  },
+  credentials: true
 };
 
 app.use(cors(corsOptions));
