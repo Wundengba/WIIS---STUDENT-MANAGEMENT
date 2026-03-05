@@ -1,0 +1,19 @@
+:root{--sidebar-gradient-start:#071130;--sidebar-gradient-end:#15306b;--accent:#60a5fa;--muted:#94a3b8}
+.app-shell-aside{background:linear-gradient(180deg,var(--sidebar-gradient-start) 0%,var(--sidebar-gradient-end) 100%);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-logo{width:100%;height:100%;object-fit:cover;display:block}
+.sidebar-header{padding:0;border-bottom:none;flex-shrink:0;height:96px}
+.logo-wrap{width:100%;height:100%;margin:0;border-radius:0;overflow:hidden;box-shadow:none;background:transparent;border-left:none}
+.logo-wrap.collapsed{height:100%;border-radius:0;margin:0;border-left:none}
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0}
+.sidebar-nav button{all:unset;display:flex;align-items:center;gap:10px;width:100%;padding:clamp(8px, 2vw, 12px) clamp(16px, 3vw, 22px);color:var(--muted);cursor:pointer;text-align:left;font-size:clamp(12px, 2vw, 15px);font-weight:500;transition:background .18s ease,color .12s ease,transform .08s ease;border-radius:clamp(6px, 1vw, 8px);margin:0 clamp(4px, 1vw, 8px)}
+.sidebar-nav button:hover{background:rgba(255,255,255,0.04);color:#fff;transform:translateX(2px)}
+.sidebar-nav button.active{background:rgba(255,255,255,0.09);color:#fff;font-weight:700;border-right:3px solid var(--accent)}
+.sidebar-logout{padding:clamp(12px, 2vw, 18px);border-top:1px solid rgba(255,255,255,0.06);flex-shrink:0}
+.sidebar-logout button{width:100%;padding:clamp(10px, 2vw, 14px) clamp(14px, 2vw, 20px);background:transparent;border:1px solid rgba(255,255,255,0.08);color:#cbd5e1;border-radius:clamp(6px, 1vw, 10px);cursor:pointer;display:flex;align-items:center;gap:clamp(6px, 1vw, 10px);justify-content:center;font-weight:600;font-size:clamp(12px, 2vw, 15px);transition:all 0.2s ease}
+.sidebar-logout button:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
+@media (max-width:720px){.sidebar-header{height:80px}}
+@media (max-width:640px){
+  .sidebar-nav button{padding:clamp(10px, 3vw, 14px) clamp(12px, 4vw, 18px);font-size:clamp(14px, 3vw, 16px)}
+  .sidebar-nav button span:first-child{width:clamp(24px, 6vw, 28px)}
+  .sidebar-logout button{font-size:clamp(14px, 3vw, 16px)}
+}
